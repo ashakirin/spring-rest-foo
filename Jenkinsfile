@@ -1,20 +1,11 @@
 pipeline {
     agent any
-
     stages {
-        stage("build") {
+        stage('build sample project') {
             steps {
-                echo "build application"
-            }
-        }
-        stage("test") {
-            steps {
-                echo "test application"
-            }
-        }
-        stage("deploy") {
-            steps {
-                echo "deploy application"
+                git 'https://github.com/ashakirin/spring-rest-foo.git'
+                sh 'mvn --version'
+                sh 'mvn clean install'
             }
         }
     }

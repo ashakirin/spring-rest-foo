@@ -15,6 +15,11 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <jib-maven-plugin.version>2.5.2</jib-maven-plugin.version>
+        <jib-maven-plugin.image>ashakirin/${project.artifactId}</jib-maven-plugin.image>
+        <application.port>8080</application.port>
+        <management.port>9080</management.port>
+        <spring-boot.version>2.5.1</spring-boot.version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,6 +39,29 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib-maven-plugin.version}</version>
+                <configuration>
+                    <from>
+                        <image>openjdk:11</image>
+                    </from>
+                    <to>
+                        <image>${jib-maven-plugin.image}</image>
+                        <tags>
+                            <tag>${project.version}</tag>
+                        </tags>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>${application.port}</port>
+                            <port>${management.port}</port>
+                        </ports>
+                    </container>
+                </configuration>
             </plugin>
         </plugins>
     </build>
